@@ -1,0 +1,123 @@
+
+----SOLUTIONS----
+
+1. Count the number of Movies vs TV Shows
+SELECT Type , COUNT(type) as Number
+FROM Netflix_table
+GROUP BY Type 
+
+2. List all movies released in a specific year (e.g., 2020)
+SELECT title, release_year 
+FROM Netflix_table
+WHERE release_year = 2020 AND type='Movie' 
+ORDER BY title DESC 
+
+3. Find the top 5 countries with the most content on Netflix
+SELECT TOP 5 COUNT(TRIM(Value)) as Quantinty, 
+	   TRIM(Value) as Countries 
+FROM 
+	Netflix_table
+CROSS APPLY
+	STRING_SPLIT(country,',')
+
+WHERE TRIM(VALUE) != '' AND TRIM(VALUE) IS NOT NULL
+GROUP BY TRIM(Value)
+ORDER BY Quantinty DESC
+
+4. Identify the longest movie for description 
+SELECT title,description 
+FROM Netflix_table 
+WHERE
+	LEN(description) =(SELECT MAX(LEN(description)) 
+			    FROM Netflix_table)
+GROUP BY title,description
+
+5. Find content added in the last 5 years
+SELECT * FROM Netflix_table
+WHERE 
+	DATEDIFF( YEAR , date_added , GETDATE()) <= 5
+
+6. Find all the movies/TV shows by director 'Rajiv Chilaka'!
+SELECT * FROM Netflix_table
+WHERE director LIKE '%Rajiv Chilaka%'
+ORDER BY release_year
+
+7. List all TV shows with more than 5 seasons 
+SELECT type,title,duration  
+FROM Netflix_table
+WHERE type = 'TV Show' AND duration > '5'  
+ORDER BY duration DESC
+
+8. Count the number of content items in each genre 
+SELECT TRIM(value) AS Category ,
+	   COUNT(*) AS Quantity 
+	   
+FROM Netflix_table
+CROSS APPLY STRING_SPLIT(listed_in, ',')	   
+GROUP BY TRIM(value)
+ORDER BY Quantity DESC
+9. List all movies that are documentaries
+SELECT type,title 
+FROM Netflix_table
+WHERE listed_in LIKE '%Documentaries%' AND type='Movie' 
+
+10. Find all content without a director
+SELECT type, title
+FROM Netflix_table
+WHERE director='' OR director=' ' OR director IS NULL 
+
+11. Find how many movies actor 'Salman Khan' appeared in last 10 years
+SELECT COUNT(*)
+FROM Netflix_table
+WHERE casts LIKE '%Salman Khan%'
+	 AND
+	 DATEDIFF(YEAR  ,release_year , GETDATE()) < = 10 
+
+12. Find the top 10 actors who have appeared in the highest number of movies produced in India.
+SELECT 
+    TOP 10 value AS actor, 
+    COUNT(*) AS count_cast
+FROM Netflix_table
+CROSS APPLY 
+    STRING_SPLIT(casts, ',')
+WHERE country LIKE '%India%'
+GROUP BY value
+ORDER BY count_cast DESC
+
+13 . Find the country-wise distribution of content released in 2018, rated "TV-MA," and without a listed director.
+SELECT COUNT(*) as Quantity,
+	   TRIM(value) as Countries,
+FROM 
+	(SELECT * FROM Netflix_table
+			  WHERE director='' OR director=' ' OR director IS NULL ) AS New_table
+
+CROSS APPLY STRING_SPLIT(country,',')
+WHERE release_year = 2018 AND rating ='TV-MA'
+GROUP BY TRIM(value),director
+ORDER BY Quantity
+
+14. Find the total duration of content in the "Comedy" genre, rated "PG-13," and added in 2015.
+SELECT type, 
+	   SUM(CONVERT(int, LEFT (duration,CHARINDEX(' ', duration)-1) )) as Time  
+FROM Netflix_table
+WHERE listed_in LIKE '%comedies%' 
+	  AND rating='PG-13'
+	  AND release_year = 2015
+GROUP BY type
+
+15. Group content featuring "Scarlett Johansson" by genre and sort by release year.
+SELECT type, release_year, title
+FROM Netflix_table
+WHERE casts LIKE '%Scarlett Johansson%'
+ORDER BY release_year
+
+16 .Count the number of "United States" productions added between 2010-2020 that are categorized as both "Action" and "Drama."
+SELECT COUNT(*) FROM Netflix_table
+WHERE 
+	listed_in LIKE '%action%' AND listed_in LIKE '%drama%'
+AND 
+	country LIKE '%United States%'
+AND 
+	release_year BETWEEN 2010 AND 2020
+
+
