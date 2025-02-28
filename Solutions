@@ -72,12 +72,12 @@ WHERE director='' OR director=' ' OR director IS NULL
 11. List all actors from the content added in the last 10 years and the number of contents they have 
 appeared in 
 SELECT COUNT(*) as Unity,  
-	TRIM(Performer.value) AS Casts 
+	TRIM(Value) AS Casts 
 FROM Netflix_table 
 CROSS APPLY  
-	STRING_SPLIT(casts,',') as Performer 
+	STRING_SPLIT(casts,',')
 WHERE YEAR(GETDATE())- release_year < =10 AND TRIM(casts)!=''  
-GROUP BY TRIM(Performer.value) 
+GROUP BY TRIM(Value) 
 ORDER BY Unity DESC  
 
 12. Find the top 10 actors who have appeared in the highest number of movies produced in India.
