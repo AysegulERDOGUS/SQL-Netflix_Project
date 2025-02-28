@@ -32,10 +32,12 @@ WHERE
 			    FROM Netflix_table)
 GROUP BY title,description
 
-5. Find content added in the last 5 years
-SELECT * FROM Netflix_table
-WHERE 
-	DATEDIFF( YEAR , date_added , GETDATE()) <= 5
+5. Find the yearly distribution of each genre added in the last 5 years. 
+SELECT type,release_year,  
+	COUNT(*) AS Unity 
+FROM Netflix_table 
+WHERE YEAR(GETDATE()) - release_year <=5 
+GROUP BY type , release_year 
 
 6. Find all the movies/TV shows by director 'Rajiv Chilaka'!
 SELECT * FROM Netflix_table
@@ -56,6 +58,7 @@ FROM Netflix_table
 CROSS APPLY STRING_SPLIT(listed_in, ',')	   
 GROUP BY TRIM(value)
 ORDER BY Quantity DESC
+
 9. List all movies that are documentaries
 SELECT type,title 
 FROM Netflix_table
@@ -66,12 +69,16 @@ SELECT type, title
 FROM Netflix_table
 WHERE director='' OR director=' ' OR director IS NULL 
 
-11. Find how many movies actor 'Salman Khan' appeared in last 10 years
-SELECT COUNT(*)
-FROM Netflix_table
-WHERE casts LIKE '%Salman Khan%'
-	 AND
-	 DATEDIFF(YEAR  ,release_year , GETDATE()) < = 10 
+11. List all actors from the content added in the last 10 years and the number of contents they have 
+appeared in 
+SELECT COUNT(*) as Unity,  
+	TRIM(Performer.value) AS Casts 
+FROM Netflix_table 
+CROSS APPLY  
+	STRING_SPLIT(casts,',') as Performer 
+WHERE YEAR(GETDATE())- release_year < =10 AND TRIM(casts)!=''  
+GROUP BY TRIM(Performer.value) 
+ORDER BY Unity DESC  
 
 12. Find the top 10 actors who have appeared in the highest number of movies produced in India.
 SELECT 
@@ -84,17 +91,18 @@ WHERE country LIKE '%India%'
 GROUP BY value
 ORDER BY count_cast DESC
 
-13 . Find the country-wise distribution of content released in 2018, rated "TV-MA," and without a listed director.
-SELECT COUNT(*) as Quantity,
-	   TRIM(value) as Countries,
-FROM 
-	(SELECT * FROM Netflix_table
-			  WHERE director='' OR director=' ' OR director IS NULL ) AS New_table
+13 . Find the country-wise distribution of content released in 2018, rated "TV-MA," and without a listed 
+director. 
+SELECT COUNT(*) as Quantity,  
+       TRIM(value) as Countries  
+FROM   
+ 	(SELECT * FROM Netflix_table  
+		  WHERE TRIM(director)='' OR director IS NULL ) AS New_table  
 
-CROSS APPLY STRING_SPLIT(country,',')
-WHERE release_year = 2018 AND rating ='TV-MA'
-GROUP BY TRIM(value),director
-ORDER BY Quantity
+CROSS APPLY STRING_SPLIT(country,',')  
+WHERE release_year = 2018 AND rating ='TV-MA'  
+GROUP BY TRIM(value)  
+ORDER BY Quantity DESC
 
 14. Find the total duration of content in the "Comedy" genre, rated "PG-13," and added in 2015.
 SELECT type, 
