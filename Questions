@@ -2,15 +2,17 @@
 2. List all movies released in a specific year (e.g., 2020)
 3. Find the top 5 countries with the most content on Netflix
 4. Identify the longest movie for description 
-5. Find content added in the last 5 years
+5. Find the yearly distribution of each genre added in the last 5 years. 
 6. Find all the movies/TV shows by director 'Rajiv Chilaka'!
 7. List all TV shows with more than 5 seasons 
 8. Count the number of content items in each genre 
 9. List all movies that are documentaries
 10. Find all content without a director
-11. Find how many movies actor 'Salman Khan' appeared in last 10 years
+11. List all actors from the content added in the last 10 years and the number of contents they have 
+appeared in
 12. Find the top 10 actors who have appeared in the highest number of movies produced in India.
-13 . Find the country-wise distribution of content released in 2018, rated "TV-MA," and without a listed director.
+13 . Find the country-wise distribution of content released in 2018, rated "TV-MA," and without a listed 
+director.
 14. Find the total duration of content in the "Comedy" genre, rated "PG-13," and added in 2015.
 15. Group content featuring "Scarlett Johansson" by genre and sort by release year.
 16 .Count the number of "United States" productions added between 2010-2020 that are categorized as both "Action" and "Drama."
