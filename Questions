@@ -16,3 +16,4 @@ director.
 14. Find the total duration of content in the "Comedy" genre, rated "PG-13," and added in 2015.
 15. Group content featuring "Scarlett Johansson" by genre and sort by release year.
 16 .Count the number of "United States" productions added between 2010-2020 that are categorized as both "Action" and "Drama."
+17 . Find the first and last years of content created by directors.
