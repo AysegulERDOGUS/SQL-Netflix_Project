@@ -33,11 +33,12 @@ WHERE
 GROUP BY title,description
 
 5. Find the yearly distribution of each genre added in the last 5 years. 
-SELECT type,release_year,  
-	COUNT(*) AS Unity 
-FROM Netflix_table 
-WHERE YEAR(GETDATE()) - release_year <=5 
-GROUP BY type , release_year 
+SELECT  type,  
+	YEAR(date_added) AS Years,   
+	COUNT(*) AS Unity  
+FROM Netflix_table  
+WHERE DATEDIFF(YEAR,date_added,GETDATE()) <=5 
+GROUP BY type ,YEAR(date_added)
 
 6. Find all the movies/TV shows by director 'Rajiv Chilaka'!
 SELECT * FROM Netflix_table
@@ -71,13 +72,13 @@ WHERE director='' OR director=' ' OR director IS NULL
 
 11. List all actors from the content added in the last 10 years and the number of contents they have 
 appeared in 
-SELECT COUNT(*) as Unity,  
-	TRIM(Value) AS Casts 
-FROM Netflix_table 
-CROSS APPLY  
-	STRING_SPLIT(casts,',')
-WHERE YEAR(GETDATE())- release_year < =10 AND TRIM(casts)!=''  
-GROUP BY TRIM(Value) 
+SELECT  COUNT(*) as Unity,   
+	TRIM(Value) AS Casts , 
+FROM Netflix_table  
+CROSS APPLY   
+	STRING_SPLIT(casts,',')   
+WHERE DATEDIFF(YEAR,date_added, GETDATE()) < =10 AND TRIM(casts)!=''   
+GROUP BY TRIM(Value)  
 ORDER BY Unity DESC  
 
 12. Find the top 10 actors who have appeared in the highest number of movies produced in India.
@@ -127,5 +128,14 @@ AND
 	country LIKE '%United States%'
 AND 
 	release_year BETWEEN 2010 AND 2020
+
+17 . Find the first and last years of content created by directors.
+SELECT director,
+	MIN(Release_year) AS First,
+	MAX(Release_year) AS Last
+FROM Netflix_table
+WHERE TRIM(director)!=''
+GROUP BY director
+
 
 
