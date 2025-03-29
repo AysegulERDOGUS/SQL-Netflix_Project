@@ -1,6 +1,6 @@
 ## Netflix Data Analysis with SQL
 
-- This project explores Netflix's extensive movie and TV show database using SQL to uncover insights that can help improve content decisions.
+-In this project, we analyze Netflix data using SQL and thoroughly examine the database to answer questions about newly added content, the most popular actors, and more
 
 ## Goals
 
@@ -10,7 +10,7 @@
 
 - What new content has been added recently? We identified newly added movies and shows by analyzing release dates.
 - How many movies and TV shows are there in each category? We counted the number of titles in different genres.
-- How can users search for specific content? We enabled filtering by release year, cast, and other criteria.
+
 
 
 
