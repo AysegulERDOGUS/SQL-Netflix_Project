@@ -9,7 +9,7 @@
 ## Database Manipulations with SQL
 In this project, several database modifications have been made to analyze the Netflix dataset.
 
-    Data Update (UPDATE)
+    ## Data Update (UPDATE)
     To make it easier to process the date column with different formats, the format and data type have been changed:
       SELECT CONVERT(DATE, date_added, 104) 
       FROM Netflix_table;
