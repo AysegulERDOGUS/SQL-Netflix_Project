@@ -119,7 +119,7 @@ JOIN N_Customers N ON N.Show_id=G.show_id
 GROUP BY G.genre_name
 ORDER BY Unity DESC
 
-13. Create a table comparing the average points scored between male and female users. View ile yapılacak
+13. Create a table comparing the average points scored between male and female users.
 
 SELECT gender, 
 	   AVG (CAST( movie_point AS FLOAT)) AS Average_Point
