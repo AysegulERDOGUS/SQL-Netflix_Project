@@ -14,7 +14,6 @@ SELECT COUNT(*)
 FROM Media_Data
 WHERE DATEDIFF(year,date_added,GETDATE())>=5  
 
-
 3. Find how many movies actor 'Salman Khan' appeared in last 10 years
 
 SELECT C.cast_name , 
@@ -23,7 +22,6 @@ FROM Media_Data M
 JOIN Casts C ON C.show_id=M.show_id
 WHERE C.cast_name='Salman Khan'
 	  AND YEAR(GETDATE())-release_year<=10
-
 
 4. Find the top 10 actors who have appeared in the highest number of movies produced in India. 
 
@@ -36,10 +34,6 @@ WHERE Cntry.country_name='India'
 	  AND C.cast_name != ''
 GROUP BY C.cast_name
 ORDER BY Unity DESC
-
-
-
-
 
 5. Find the total duration of content in the "Comedy" genre, rated "PG-13," and added in 2015. bitti
 
