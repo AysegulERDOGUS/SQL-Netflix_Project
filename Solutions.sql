@@ -72,7 +72,10 @@ WHERE D.director_name!=''
 GROUP BY D.director_name
 ORDER BY Name
 
-8. List the top 5 titles released in the most countries, along with the number of countries they were available in.
+8. For each genre that an actor has appeared in, list the actors name, genre name, the number of productions in that genre, and the average rating. 
+	Compare this average rating with the actor’s overall average rating and indicate their success level (such as successful or unsuccessful). 
+Include only actors who have appeared in at least 4 different productions.
+
 
 SELECT TOP 5 COUNT(DISTINCT C.country_name)AS Unity,
 	   M.title 
@@ -101,15 +104,16 @@ GROUP BY C.cast_name
 HAVING C.cast_name <> '' AND COUNT(DISTINCT G.genre_name)>10
 ORDER BY Unity DESC
 
-11. How many different directors worked for each country?
+11.Show the total number of films watched by the first 10 users who joined the platform and the average age of these users.
 
-SELECT  C.country_name,
-		COUNT(DISTINCT D.director_name) AS Director_Count 
-FROM Director D
-JOIN Countries C ON C.show_id=D.show_id
-WHERE C.country_name <>'' AND d.director_name <> ''
-GROUP BY C.country_name
-ORDER BY Director_Count DESC
+WITH New AS (SELECT *, 
+	    		DENSE_RANK() OVER (ORDER BY N.membership_date) AS Sorting
+FROM N_Customers N
+			)
+SELECT COUNT(DISTINCT show_id) as Unity,
+	         AVG(age) Avg_Age 
+FROM New
+WHERE Sorting <= 10
 
  12. Find the most watched genres. Write a query showing how many different users watched each genre.
 
@@ -161,7 +165,7 @@ GROUP BY M.show_id,M.title,N.movie_point
 HAVING AVG(N.movie_point)> (SELECT AVG(movie_point) FROM N_Customers)
 ORDER BY M.title ASC
 
-17.	Calculate the average duration for each type.
+17.Calculate the average duration for each type.
 
 SELECT Type,
 		ROUND(AVG(CAST(LEFT(duration,CHARINDEX(' ',duration)) as float)),0) as AVG
