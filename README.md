@@ -1,14 +1,27 @@
 ## Netflix Data Analysis Project – Using SQL
-This project involves comprehensive analysis of a Netflix dataset that was previously cleaned. Columns containing multiple values were correctly parsed using SQL queries, making the data model more organized and easier to analyze, resulting in a consistent and relational structure. Detailed queries were written to answer many questions, ranging from newly added content to the actors with the most roles.
 
-You can access the previously completed data cleaning project here :          https://github.com/AysegulERDOGUS/Data_Cleaning
+In this project, a Netflix dataset that was previously cleaned using SQL is analyzed.
+Since the data cleaning and parsing steps were handled in a separate project, this work focuses only on the analysis part.
 
-## Project Goal
-The main goal is to analyze the data using SQL and answer key questions.
+🔗 You can access the previously completed data cleaning project here : 
 
-## Key Questions Analyzed
+		Data cleaning project : https://github.com/AysegulERDOGUS/Data_Cleaning
 
-* What new content has been added in the last 5 years?
-* How much content exists in each genre?
-* Who are the actors with the most roles?
-* In which countries has the content been released, and what is the distribution?
+
+📌 Analysis Approach
+
+In this project, the data is analyzed using a relational data model.
+SQL queries were written to explore questions such as:
+
+      * Content added in recent years
+      * Content distribution by genre
+      * How often actors appear in different content
+      * Distribution of content by country
+
+During the analysis, table relationships were used, and the data was filtered and grouped when needed.
+
+✨ Conclusion
+
+This project focuses on analyzing a previously cleaned Netflix dataset using SQL.
+The data was explored through different questions to better understand its structure and content.
+
