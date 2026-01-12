@@ -5,7 +5,7 @@ Since the data cleaning and parsing steps were handled in a separate project, th
 
 🔗 You can access the previously completed data cleaning project here : 
 
-		Data cleaning project : https://github.com/AysegulERDOGUS/Data_Cleaning
+	 		https://github.com/AysegulERDOGUS/Data_Cleaning
 
 
 📌 Analysis Approach
