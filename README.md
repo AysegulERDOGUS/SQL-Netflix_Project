@@ -3,8 +3,10 @@
 In this project, a Netflix dataset that was previously cleaned using SQL is analyzed.
 Since the data cleaning and parsing steps were handled in a separate project, this work focuses only on the analysis part.
 
-🔗 You can access the previously completed data cleaning project here :	 
+ You can access the previously completed data cleaning project here :	 
 [Netflix Data Cleaning Project](https://github.com/AysegulERDOGUS/Data_Cleaning)
+
+
 
 
 📌Analysis Approach
